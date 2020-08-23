@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import * as Font from 'expo-font';
+
+// To load the font and prolong the screenuntil a certain task is complete
+import { AppLoading } from 'expo' 
 
 
 import Header from './src/Components/Header'
@@ -7,7 +11,13 @@ import StartScreen from './src/Screens/StartScreen'
 import YearGameScreen from './src/Screens/YearGameScreen'
 import GameOverScreen from './src/Screens/GaveOverScreen'
 
-
+// To load font
+const getFonts = () => {
+  return Font.loadAsync({
+    'open-sans-regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+  });
+}
 
 export default function App() {
   // setting the year the user choosed
@@ -15,6 +25,20 @@ export default function App() {
 
   // numer of rounds it took to finish
   const [approxRounds, setApproxRounds] = useState(0);
+
+  // managing state for the font to load
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded){
+    return (
+      <AppLoading  
+        startAsync={getFonts} 
+        onFinish={() => setFontLoaded(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+
 
   // function to start a new game
   const coonfigNewGameHandler = () => {
