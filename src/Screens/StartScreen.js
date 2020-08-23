@@ -75,7 +75,7 @@ const StartScreen = props => {
             <View style={styles.startContainer}>
                 <Text style={styles.startTitle}> Generate Year </Text>
                 <Card style={styles.inputContainer}>
-                    <Text>Choose a Value</Text>
+                    <Text style={styles.startGameTitle}>Enter a Starting Year of choice</Text>
                     <Input 
                         style={styles.input} 
                         blurOnSubmit 
@@ -119,6 +119,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginVertical: 10,
         fontFamily: 'open-sans-bold'
+    },
+    startGameTitle:{
+        color: 'black', //black
+        fontSize: 15,
+        marginVertical: 10,
+        fontFamily: 'open-sans-regular'
     },
     inputContainer:{
         width: 300,
