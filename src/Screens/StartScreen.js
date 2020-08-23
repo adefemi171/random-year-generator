@@ -12,6 +12,7 @@ import {
 import Card from '../Components/Card';
 import Colors from '../Constants/Colors'
 import Input from '../Components/Input'
+import YearContainer from '../Components/YearContainer'
 
 // StartScreen constant for functional components
 const StartScreen = props => {
@@ -50,13 +51,21 @@ const StartScreen = props => {
         setConfirmed(true);
         setSelectedYear(chosenYear);
         setEnteredYear('');
+        Keyboard.dismiss();
     };
 
     // checking for user confirmed output
     let confirmedOutput;
 
     if (confirmed) {
-    confirmedOutput = <Text>Chosen Year: { selectedYear}</Text>
+    confirmedOutput = 
+        <Card style={styles.cardSumContainer}>
+            <Text>The Year You Selected</Text>
+            <YearContainer>
+                {selectedYear}
+            </YearContainer>
+            <Button title="START" />
+        </Card>
     }
 
     return(
@@ -127,6 +136,10 @@ const styles = StyleSheet.create({
     input: {
         width: 50,
         textAlign: 'center'
+    },
+    cardSumContainer:{
+        marginTop: 20,
+        alignItems: 'center'
     }
 });
 
