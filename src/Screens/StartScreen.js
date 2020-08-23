@@ -73,7 +73,7 @@ const StartScreen = props => {
             Keyboard.dismiss();
         }}>
             <View style={styles.startContainer}>
-                <Text style={styles.startTitle}> Generate your DOB </Text>
+                <Text style={styles.startTitle}> Generate Year </Text>
                 <Card style={styles.inputContainer}>
                     <Text>Choose a Value</Text>
                     <Input 

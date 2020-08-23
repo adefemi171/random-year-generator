@@ -22,7 +22,7 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Header title={"Random DOB Generator"} />
+      <Header title={"Random Year Generator"} />
       {content}
     </View>
   );
