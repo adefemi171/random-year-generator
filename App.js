@@ -16,9 +16,14 @@ export default function App() {
   // numer of rounds it took to finish
   const [approxRounds, setApproxRounds] = useState(0);
 
+  // function to start a new game
+  const coonfigNewGameHandler = () => {
+    setApproxRounds(0);
+    setUserYear(null);
+  }
+
   const startGameHandler = (selectedYear) => {
     setUserYear(selectedYear);
-    setApproxRounds(0);
   };
 
   // Set when the game is over
@@ -31,9 +36,17 @@ export default function App() {
   let content = <StartScreen onStartGame={startGameHandler}/>
 
   if (userYear && approxRounds <= 0) {
-    content = <YearGameScreen  userChoice={userYear} onGameOver={gameOverHandler}/>
+    content = (
+      <YearGameScreen  userChoice={userYear} onGameOver={gameOverHandler}/>
+    );
   } else if (approxRounds > 0){
-    content = <GameOverScreen />
+    content = (
+      <GameOverScreen 
+        roundsYear={approxRounds} 
+        userYear={userYear} 
+        onRestart={coonfigNewGameHandler}
+      />
+    );
   }
 
 
