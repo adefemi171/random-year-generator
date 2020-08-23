@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Font from 'expo-font';
 
-// To load the font and prolong the screenuntil a certain task is complete
+// To load the font and prolong the screen until a certain task is complete
 import { AppLoading } from 'expo' 
 
 
