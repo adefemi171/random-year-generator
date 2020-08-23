@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    Button, 
+    TouchableWithoutFeedback, 
+    Keyboard,
+    Alert 
+} from 'react-native';
 
 import Card from '../Components/Card';
 import Colors from '../Constants/Colors'
@@ -31,7 +39,12 @@ const StartScreen = props => {
     // Function to reset the entered year
     const confirmInputHandler = () => {
         const chosenYear = parseInt(enteredYear);
-        if (chosenYear === NaN || chosenYear <= 0 || chosenYear > 2010) {
+        if (isNaN(chosenYear)|| chosenYear <= 1799 || chosenYear > 2010) {
+            Alert.alert(
+                'Invalid Year!', 
+                'Year has to be between 1800 and 2010.', 
+                [{text:'Okay', style:'destructive', onPress:resetInputHandler}]
+            );
             return;
         }
         setConfirmed(true);
@@ -59,7 +72,7 @@ const StartScreen = props => {
                         blurOnSubmit 
                         keyboardType="number-pad" 
                         maxLength={4}
-                        onChangeTExt={yearInputHandler}
+                        onChangeText={yearInputHandler}
                         value={enteredYear}
                     />
                     <View style={styles.buttonContainer}>
