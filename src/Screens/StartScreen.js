@@ -64,7 +64,7 @@ const StartScreen = props => {
             <YearContainer>
                 {selectedYear}
             </YearContainer>
-            <Button title="START" />
+            <Button title="START"  onPress={() => props.onStartGame(selectedYear)}/>
         </Card>
     }
 
