@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import YearScreen from '../Components/YearContainer'
 import Card from '../Components/Card'
@@ -70,15 +73,11 @@ const YearGameScreen = props =>{
             <Text> Your Year choice</Text>
             <YearScreen>{currentApprox}</YearScreen>
             <Card style={styles.choiceContainer}>
-                <CustomButton 
-                    onTouch={nextApproxHandler.bind(this, 'lower')}
-                > 
-                    LOWER 
+                <CustomButton onTouch={nextApproxHandler.bind(this, 'lower')}> 
+                    <MaterialCommunityIcons name="less-than" size={24} color="black" />
                 </CustomButton>
-                <CustomButton
-                    onTouch={nextApproxHandler.bind(this, 'higher')}
-                > 
-                    HIGHER 
+                <CustomButton onTouch={nextApproxHandler.bind(this, 'higher')}> 
+                    <MaterialCommunityIcons name="greater-than" size={24} color="black" />
                 </CustomButton>
             </Card>
         </View>
