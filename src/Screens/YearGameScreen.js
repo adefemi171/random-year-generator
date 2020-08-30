@@ -99,8 +99,8 @@ const YearGameScreen = props =>{
                     <MaterialCommunityIcons name="greater-than" size={24} color="black" />
                 </CustomButton>
             </Card>
-            <View style={styles.list}>
-                <ScrollView>
+            <View style={styles.listContainer}>
+                <ScrollView contentContainerStyle={styles.contentList}>
                     {pastApprox.map((approx, index) => renderPastApproxItem(approx, pastApprox.length - index))}
                 </ScrollView>
             </View>
@@ -123,9 +123,14 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '80%'
     },
-    list:{
+    listContainer:{
         flex: 1,
         width: '80%'
+    },
+    contentList: {
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end'
     },
     listItem:{
         flexDirection: 'row',
