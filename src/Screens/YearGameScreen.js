@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -25,10 +25,10 @@ const yearRandomGeneratBetween = (min, max, exclude) => {
 }
 
 // To style and render the list for past guesses
-const renderPastApproxItem = (value, numOfRound) => (
-    <View key={value} style={styles.listItem}>
-        <TextBody>{numOfRound}</TextBody>
-        <TextBody>{value}</TextBody>
+const renderPastApproxItem = (listLength, itemData) => (
+    <View style={styles.listItem}>
+        <TextBody>{listLength - itemData.index}</TextBody>
+        <TextBody>{itemData.item}</TextBody>
     </View>
 )
 
@@ -41,7 +41,7 @@ const YearGameScreen = props =>{
     // const [rounds, setRounds] = useState(0);
 
     // State to save past year guess from user input
-    const [pastApprox, setPastApprox] = useState([initialApprox]);
+    const [pastApprox, setPastApprox] = useState([initialApprox.toString()]);
 
     // useRef allows to define a value which survives component re-rendering
     // This const are boundaries for initial year
@@ -83,7 +83,7 @@ const YearGameScreen = props =>{
         );
         setCurrentApprox(nextYear)
         // setRounds(curRounds => curRounds + 1)
-        setPastApprox(curPastApprox => [nextYear, ...curPastApprox])
+        setPastApprox(curPastApprox => [nextYear.toString(), ...curPastApprox])
     };
 
 
@@ -100,9 +100,15 @@ const YearGameScreen = props =>{
                 </CustomButton>
             </Card>
             <View style={styles.listContainer}>
-                <ScrollView contentContainerStyle={styles.contentList}>
+                { /*<ScrollView contentContainerStyle={styles.contentList}>
                     {pastApprox.map((approx, index) => renderPastApproxItem(approx, pastApprox.length - index))}
-                </ScrollView>
+                </ScrollView> */}
+                <FlatList 
+                    keyExtractor={(item) => item} 
+                    data={pastApprox} 
+                    renderItem={renderPastApproxItem.bind(this, pastApprox.length)}
+                    contentContainerStyle={styles.contentList}
+                />
             </View>
         </View>
     )
@@ -125,11 +131,11 @@ const styles = StyleSheet.create({
     },
     listContainer:{
         flex: 1,
-        width: '80%'
+        width: '60%'
     },
     contentList: {
         flexGrow: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'flex-end'
     },
     listItem:{
@@ -139,7 +145,8 @@ const styles = StyleSheet.create({
         padding: 15,
         marginVertical: 10,
         backgroundColor: 'grey',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        width: '100%'
     }
 })
 
