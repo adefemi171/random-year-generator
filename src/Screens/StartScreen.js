@@ -93,7 +93,7 @@ const StartScreen = props => {
                     <View style={styles.buttonContainer}>
                         <View style={styles.eachButton}>
                             <CustomButton 
-                                onPress={resetInputHandler} 
+                                onTouch={resetInputHandler} 
                                 color={Colors.accent}
                             >
                                 <AntDesign name="closecircle" size={40} color="black" />
@@ -101,7 +101,7 @@ const StartScreen = props => {
                         </View>
                         <View style={styles.eachButton}>
                             <CustomButton 
-                                onPress={confirmInputHandler} 
+                                onTouch={confirmInputHandler} 
                                 color={Colors.primary}
                             > 
                                 <AntDesign name="checkcircle" size={40} color="black" />
