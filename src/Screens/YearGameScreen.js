@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -24,11 +24,16 @@ const yearRandomGeneratBetween = (min, max, exclude) => {
 }
 
 const YearGameScreen = props =>{
-    const [currentApprox, setCurrentApprox] = useState(
-        yearRandomGeneratBetween(1800, 2011, props.userChoice)
-    );
 
-    const [rounds, setRounds] = useState(0);
+    const initialApprox = yearRandomGeneratBetween(1800, 2011, props.userChoice);
+
+    const [currentApprox, setCurrentApprox] = useState(initialApprox);
+
+    // const [rounds, setRounds] = useState(0);
+
+    // State to save past year guess from user input
+    const [pastApprox, setPastApprox] = useState([initialApprox]);
+
     // useRef allows to define a value which survives component re-rendering
     // This const are boundaries for initial year
     const currentLow = useRef(1800);
@@ -41,7 +46,7 @@ const YearGameScreen = props =>{
     // check if the game is over
     useEffect(() => {
         if (currentApprox === userChoice){
-            onGameOver(rounds);
+            onGameOver(pastApprox.length);
         }
     }, [currentApprox, userChoice, onGameOver])
 
@@ -60,11 +65,16 @@ const YearGameScreen = props =>{
         if (direction === 'lower') {
             currentHigh.current = currentApprox;
         } else {
-            currentLow.current = currentApprox;
+            currentLow.current = currentApprox + 1; //by adding 1 the new lower boundary in the yearRandomGeneratBetween is 1 higher than the currentApprox
         }
-        const nextYear = yearRandomGeneratBetween(currentLow.current, currentHigh.current, currentApprox);
+        const nextYear = yearRandomGeneratBetween(
+            currentLow.current, 
+            currentHigh.current, 
+            currentApprox
+        );
         setCurrentApprox(nextYear)
-        setRounds(curRounds => curRounds + 1)
+        // setRounds(curRounds => curRounds + 1)
+        setPastApprox(curPastApprox => [nextYear, ...curPastApprox])
     };
 
 
@@ -80,6 +90,13 @@ const YearGameScreen = props =>{
                     <MaterialCommunityIcons name="greater-than" size={24} color="black" />
                 </CustomButton>
             </Card>
+            <ScrollView>
+                {pastApprox.map(approx => (
+                    <View key={approx}>
+                        <Text>{approx}</Text>
+                    </View>
+                ))}
+            </ScrollView>
         </View>
     )
 
