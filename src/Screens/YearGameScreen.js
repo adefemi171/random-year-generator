@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import YearScreen from '../Components/YearContainer'
 import Card from '../Components/Card'
 import CustomButton from '../Components/CustomButton'
+import TextBody from '../Components/TextBody'
 
 
 // Functon to generate random year between a min and a max year and
@@ -22,6 +23,14 @@ const yearRandomGeneratBetween = (min, max, exclude) => {
         return rndYr;
     }
 }
+
+// To style and render the list for past guesses
+const renderPastApproxItem = (value, numOfRound) => (
+    <View key={value} style={styles.listItem}>
+        <TextBody>{numOfRound}</TextBody>
+        <TextBody>{value}</TextBody>
+    </View>
+)
 
 const YearGameScreen = props =>{
 
@@ -90,13 +99,11 @@ const YearGameScreen = props =>{
                     <MaterialCommunityIcons name="greater-than" size={24} color="black" />
                 </CustomButton>
             </Card>
-            <ScrollView>
-                {pastApprox.map(approx => (
-                    <View key={approx}>
-                        <Text>{approx}</Text>
-                    </View>
-                ))}
-            </ScrollView>
+            <View style={styles.list}>
+                <ScrollView>
+                    {pastApprox.map((approx, index) => renderPastApproxItem(approx, pastApprox.length - index))}
+                </ScrollView>
+            </View>
         </View>
     )
 
@@ -115,6 +122,19 @@ const styles = StyleSheet.create({
         marginTop: 20,
         width: 300,
         maxWidth: '80%'
+    },
+    list:{
+        flex: 1,
+        width: '80%'
+    },
+    listItem:{
+        flexDirection: 'row',
+        borderColor: 'ash',
+        borderWidth: 1,
+        padding: 15,
+        marginVertical: 10,
+        backgroundColor: 'grey',
+        justifyContent: 'space-between'
     }
 })
 
