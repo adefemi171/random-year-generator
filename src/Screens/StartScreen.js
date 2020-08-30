@@ -13,6 +13,8 @@ import Card from '../Components/Card';
 import Colors from '../Constants/Colors'
 import Input from '../Components/Input'
 import YearContainer from '../Components/YearContainer'
+import TextBody from '../Components/TextBody'
+import TextTitle from '../Components/TextTitle'
 
 // StartScreen constant for functional components
 const StartScreen = props => {
@@ -60,7 +62,7 @@ const StartScreen = props => {
     if (confirmed) {
     confirmedOutput = 
         <Card style={styles.cardSumContainer}>
-            <Text>The Year You Selected</Text>
+            <TextBody>The Year You Selected</TextBody>
             <YearContainer>
                 {selectedYear}
             </YearContainer>
@@ -73,7 +75,7 @@ const StartScreen = props => {
             Keyboard.dismiss();
         }}>
             <View style={styles.startContainer}>
-                <Text style={styles.startTitle}> Generate Year </Text>
+                <TextTitle> Generate Year </TextTitle>
                 <Card style={styles.inputContainer}>
                     <Text style={styles.startGameText}>Enter a Starting Year of choice</Text>
                     <Input 
@@ -114,12 +116,6 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
     },
-    startTitle:{
-        color: 'black', //black
-        fontSize: 20,
-        marginVertical: 10,
-        fontFamily: 'open-sans-bold'
-    },
     startGameText:{
         color: 'grey',
         fontSize: 15,
@@ -129,7 +125,7 @@ const styles = StyleSheet.create({
     inputContainer:{
         width: 300,
         maxWidth: '80%',
-        alignItems: 'center'        
+        alignItems: 'center'         
     },
     buttonContainer:{
         flexDirection: 'row',
