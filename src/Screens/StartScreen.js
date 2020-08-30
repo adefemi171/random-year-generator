@@ -8,6 +8,7 @@ import {
     Keyboard,
     Alert 
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import Card from '../Components/Card';
 import Colors from '../Constants/Colors'
@@ -91,18 +92,20 @@ const StartScreen = props => {
                     />
                     <View style={styles.buttonContainer}>
                         <View style={styles.eachButton}>
-                            <Button 
-                                title="Reset" 
+                            <CustomButton 
                                 onPress={resetInputHandler} 
                                 color={Colors.accent}
-                            />
+                            >
+                                <AntDesign name="closecircle" size={40} color="black" />
+                            </CustomButton>
                         </View>
                         <View style={styles.eachButton}>
-                            <Button 
-                                title="Confirm" 
+                            <CustomButton 
                                 onPress={confirmInputHandler} 
                                 color={Colors.primary}
-                            />
+                            > 
+                                <AntDesign name="checkcircle" size={40} color="black" />
+                            </CustomButton>
                         </View>
                     </View>
                 </Card>
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     eachButton:{
-        width: 100
+        width: 100,
     },
     input: {
         width: 50,
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
     cardSumContainer:{
         marginTop: 20,
         alignItems: 'center'
-    }
+    },
 });
 
 export default StartScreen;

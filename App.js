@@ -76,7 +76,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Header title={"Random Year Generator"} />
+      <Header title={"Random Year Guess Game"} />
       {content}
     </View>
   );

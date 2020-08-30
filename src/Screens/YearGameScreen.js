@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     },
     listItem:{
         flexDirection: 'row',
-        borderColor: 'ash',
+        borderColor: 'grey',
         borderWidth: 1,
         padding: 15,
         marginVertical: 10,

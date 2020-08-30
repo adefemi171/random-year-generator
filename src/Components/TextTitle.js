@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
 
-const TextTitle = props => <Text style={{...styles.containe, ...props.styler}}>{props.children}</Text>
+const TextTitle = props => <Text style={{...styles.container, ...props.style}}>{props.children}</Text>
 
 
 const styles = StyleSheet.create({
