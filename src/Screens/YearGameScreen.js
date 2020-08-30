@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import YearScreen from '../Components/YearContainer'
 import Card from '../Components/Card'
+import CustomButton from '../Components/CustomButton'
 
 
 // Functon to generate random year between a min and a max year and
@@ -69,14 +70,16 @@ const YearGameScreen = props =>{
             <Text> Your Year choice</Text>
             <YearScreen>{currentApprox}</YearScreen>
             <Card style={styles.choiceContainer}>
-                <Button 
-                    title="LOWER" 
-                    onPress={nextApproxHandler.bind(this, 'lower')}
-                />
-                <Button 
-                    title="HIGHER" 
-                    onPress={nextApproxHandler.bind(this, 'higher')}
-                />
+                <CustomButton 
+                    onTouch={nextApproxHandler.bind(this, 'lower')}
+                > 
+                    LOWER 
+                </CustomButton>
+                <CustomButton
+                    onTouch={nextApproxHandler.bind(this, 'higher')}
+                > 
+                    HIGHER 
+                </CustomButton>
             </Card>
         </View>
     )

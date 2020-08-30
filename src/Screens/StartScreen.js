@@ -15,6 +15,7 @@ import Input from '../Components/Input'
 import YearContainer from '../Components/YearContainer'
 import TextBody from '../Components/TextBody'
 import TextTitle from '../Components/TextTitle'
+import CustomButton from '../Components/CustomButton'
 
 // StartScreen constant for functional components
 const StartScreen = props => {
@@ -66,7 +67,9 @@ const StartScreen = props => {
             <YearContainer>
                 {selectedYear}
             </YearContainer>
-            <Button title="START"  onPress={() => props.onStartGame(selectedYear)}/>
+            <CustomButton onTouch={() => props.onStartGame(selectedYear)}>
+                START
+            </CustomButton>
         </Card>
     }
 

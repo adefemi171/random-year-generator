@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button, Image } from 'react-native'
 
+
 import TextBody from '../Components/TextBody'
 import TextTitle from '../Components/TextTitle'
+import CustomButton from '../Components/CustomButton'
 import Colors from '../Constants/Colors'
 
 
@@ -26,7 +28,9 @@ const GaveOverScreen = props => {
                     Year was: <Text style={styles.textHighlight}>{props.userYear}</Text>.
                 </TextBody>
             </View>
-            <Button title="New Game" onPress={props.onRestart}/>
+            <CustomButton onTouch={props.onRestart}>
+                New Game
+            </CustomButton>
         </View>
     )
 }
