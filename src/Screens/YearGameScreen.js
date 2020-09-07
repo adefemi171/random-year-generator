@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, ScrollView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Alert, ScrollView, FlatList, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -125,13 +125,14 @@ const styles = StyleSheet.create({
     choiceContainer:{
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 20,
+        marginTop: Dimensions.get('window').height > 600 ? 20 : 5, // Using if condition (tenary operator)
         width: 300,
         maxWidth: '80%'
     },
     listContainer:{
         flex: 1,
-        width: '60%'
+        width: Dimensions.get('window').width > 300 ? '60%' : '80%',
+
     },
     contentList: {
         flexGrow: 1,
