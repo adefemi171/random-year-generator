@@ -7,7 +7,8 @@ import {
     TouchableWithoutFeedback, 
     Keyboard,
     Alert,
-    Dimensions 
+    Dimensions,
+    ScrollView
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -76,43 +77,45 @@ const StartScreen = props => {
     }
 
     return(
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss();
-        }}>
-            <View style={styles.startContainer}>
-                <TextTitle> Generate Year </TextTitle>
-                <Card style={styles.inputContainer}>
-                    <Text style={styles.startGameText}>Enter a Starting Year of choice</Text>
-                    <Input 
-                        style={styles.input} 
-                        blurOnSubmit 
-                        keyboardType="number-pad" 
-                        maxLength={4}
-                        onChangeText={yearInputHandler}
-                        value={enteredYear}
-                    />
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.eachButton}>
-                            <CustomButton 
-                                onTouch={resetInputHandler} 
-                                color={Colors.accent}
-                            >
-                                <AntDesign name="closecircle" size={50} color="black" />
-                            </CustomButton>
+        <ScrollView>
+            <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss();
+            }}>
+                <View style={styles.startContainer}>
+                    <TextTitle> Generate Year </TextTitle>
+                    <Card style={styles.inputContainer}>
+                        <Text style={styles.startGameText}>Enter a Starting Year of choice</Text>
+                        <Input 
+                            style={styles.input} 
+                            blurOnSubmit 
+                            keyboardType="number-pad" 
+                            maxLength={4}
+                            onChangeText={yearInputHandler}
+                            value={enteredYear}
+                        />
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.eachButton}>
+                                <CustomButton 
+                                    onTouch={resetInputHandler} 
+                                    color={Colors.accent}
+                                >
+                                    <AntDesign name="closecircle" size={50} color="black" />
+                                </CustomButton>
+                            </View>
+                            <View style={styles.eachButton}>
+                                <CustomButton 
+                                    onTouch={confirmInputHandler} 
+                                    color={Colors.primary}
+                                > 
+                                    <AntDesign name="checkcircle" size={50} color="black" />
+                                </CustomButton>
+                            </View>
                         </View>
-                        <View style={styles.eachButton}>
-                            <CustomButton 
-                                onTouch={confirmInputHandler} 
-                                color={Colors.primary}
-                            > 
-                                <AntDesign name="checkcircle" size={50} color="black" />
-                            </CustomButton>
-                        </View>
-                    </View>
-                </Card>
-                {confirmedOutput}
-            </View>
-        </TouchableWithoutFeedback>
+                    </Card>
+                    {confirmedOutput}
+                </View>
+            </TouchableWithoutFeedback>
+        </ScrollView>
     );
 };
 
