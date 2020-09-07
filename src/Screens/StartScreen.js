@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     View, 
     Text, 
@@ -33,6 +33,11 @@ const StartScreen = props => {
     // A state to save the entered year
     const [selectedYear, setSelectedYear] = useState();
 
+    // State to manage button width for dimension orientation
+    const [eachButtonWidth, setEachButtonWidth] = useState(Dimensions.get('window').width / 4);
+
+
+
     const yearInputHandler = inputText => {
         // validating input using regex to allow only number values
         setEnteredYear(inputText.replace(/[^0-9]/g, ''))
@@ -44,6 +49,20 @@ const StartScreen = props => {
         setConfirmed(false);
     };
 
+    // To have one running eventListener
+    useEffect( () => {
+        const updateLayout = () => {
+            setEachButtonWidth(Dimensions.get('window').width / 4);
+       }
+   
+       // A listener that listens to when the screen orientation change
+       Dimensions.addEventListener('change', updateLayout)
+
+       // cleanup function to clean up the listener
+       return () => {
+          Dimensions.removeEventListener('change', updateLayout);   
+       };
+    })
     // Function to reset the entered year
     const confirmInputHandler = () => {
         const chosenYear = parseInt(enteredYear);
@@ -96,7 +115,7 @@ const StartScreen = props => {
                                 value={enteredYear}
                             />
                             <View style={styles.buttonContainer}>
-                                <View style={styles.eachButton}>
+                                <View style={{width: eachButtonWidth}}>
                                     <CustomButton 
                                         onTouch={resetInputHandler} 
                                         color={Colors.accent}
@@ -104,7 +123,7 @@ const StartScreen = props => {
                                         <AntDesign name="closecircle" size={50} color="black" />
                                     </CustomButton>
                                 </View>
-                                <View style={styles.eachButton}>
+                                <View style={{width: eachButtonWidth}}>
                                     <CustomButton 
                                         onTouch={confirmInputHandler} 
                                         color={Colors.primary}
