@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Alert, ScrollView, FlatList, Dimensions } from 
 import { Ionicons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ScreenOrientation } from 'expo'; // import * as ScreenOrientation from 'expo-screen-orientation';
 
 import YearScreen from '../Components/YearContainer'
 import Card from '../Components/Card'
@@ -33,6 +34,9 @@ const renderPastApproxItem = (listLength, itemData) => (
 )
 
 const YearGameScreen = props =>{
+
+    // using ScreenOrientation API
+    // ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
 
     const initialApprox = yearRandomGeneratBetween(1800, 2011, props.userChoice);
 
