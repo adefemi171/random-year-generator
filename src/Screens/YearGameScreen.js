@@ -43,11 +43,32 @@ const YearGameScreen = props =>{
     // State to save past year guess from user input
     const [pastApprox, setPastApprox] = useState([initialApprox.toString()]);
 
+    // State to manage deviceWidth
+    const [ availableDeviceWidth, setAvailableDeviceWidth ] = useState(Dimensions.get('window').width);
+
+    // State to manage deviceHeight
+    const [ availableDeviceHeight, setAvailableDeviceHeight ] = useState(Dimensions.get('window').height);
+
     // useRef allows to define a value which survives component re-rendering
     // This const are boundaries for initial year
     const currentLow = useRef(1800);
     const currentHigh = useRef(2011);
     
+    // useEffect to change both the height and width when orientation changes
+    useEffect( () => {
+        // a function that runs whenever the components re-render
+        const updateLayout = () => {
+            setAvailableDeviceWidth(Dimensions.get('window').width)
+            setAvailableDeviceHeight(Dimensions.get('window').height)
+        }
+
+        Dimensions.addEventListener('change', updateLayout)
+
+        // clean up function to avoid unnecessary re-renders
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout)
+        }
+    });
     // using object destructuring to destructure props
     const { userChoice, onGameOver} = props;
 
@@ -87,6 +108,33 @@ const YearGameScreen = props =>{
     };
 
 
+    if (availableDeviceHeight < 500){
+         return (
+            <View style={styles.mainContainer}>
+                <Text> Your Year choice</Text>
+                <View style={styles.controlView}>
+                    <CustomButton onTouch={nextApproxHandler.bind(this, 'lower')}> 
+                        <MaterialCommunityIcons name="less-than" size={24} color="black" />
+                    </CustomButton>
+                    <YearScreen>{currentApprox}</YearScreen>
+                    <CustomButton onTouch={nextApproxHandler.bind(this, 'higher')}> 
+                        <MaterialCommunityIcons name="greater-than" size={24} color="black" />
+                    </CustomButton>
+                </View>
+                <View style={styles.listContainer}>
+                    { /*<ScrollView contentContainerStyle={styles.contentList}>
+                        {pastApprox.map((approx, index) => renderPastApproxItem(approx, pastApprox.length - index))}
+                    </ScrollView> */}
+                    <FlatList 
+                        keyExtractor={(item) => item} 
+                        data={pastApprox} 
+                        renderItem={renderPastApproxItem.bind(this, pastApprox.length)}
+                        contentContainerStyle={styles.contentList}
+                    />
+                </View>
+            </View>
+         );
+    }
     return(
         <View style={styles.mainContainer}>
             <Text> Your Year choice</Text>
@@ -128,6 +176,12 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').height > 600 ? 20 : 5, // Using if condition (tenary operator)
         width: 300,
         maxWidth: '80%'
+    },
+    controlView:{
+        flexDirection: 'row',
+        justifyContent: "space-around",
+        alignItems: 'center', 
+        width: '80%'
     },
     listContainer:{
         flex: 1,
