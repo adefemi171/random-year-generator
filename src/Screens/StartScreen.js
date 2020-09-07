@@ -6,7 +6,8 @@ import {
     Button, 
     TouchableWithoutFeedback, 
     Keyboard,
-    Alert 
+    Alert,
+    Dimensions 
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -96,7 +97,7 @@ const StartScreen = props => {
                                 onTouch={resetInputHandler} 
                                 color={Colors.accent}
                             >
-                                <AntDesign name="closecircle" size={40} color="black" />
+                                <AntDesign name="closecircle" size={50} color="black" />
                             </CustomButton>
                         </View>
                         <View style={styles.eachButton}>
@@ -104,7 +105,7 @@ const StartScreen = props => {
                                 onTouch={confirmInputHandler} 
                                 color={Colors.primary}
                             > 
-                                <AntDesign name="checkcircle" size={40} color="black" />
+                                <AntDesign name="checkcircle" size={50} color="black" />
                             </CustomButton>
                         </View>
                     </View>
@@ -129,8 +130,10 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-regular'
     },
     inputContainer:{
-        width: 300,
-        maxWidth: '80%',
+        width: '80%',
+        // maxWidth: '80%',
+        maxWidth: '95%',
+        minWidth: 300,
         alignItems: 'center'         
     },
     buttonContainer:{
@@ -140,7 +143,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     eachButton:{
-        width: 100,
+        // width: 100,
+        width: Dimensions.get('window').width / 4
     },
     input: {
         width: 50,
