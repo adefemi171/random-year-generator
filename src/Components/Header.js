@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 
 import Colors from '../Constants/Colors'
 import TextTitle from '../Components/TextTitle'
@@ -8,7 +8,7 @@ import TextTitle from '../Components/TextTitle'
 const Header = props => {
     return(
         <View style={styles.headerContainer}>
-            <TextTitle>{props.title}</TextTitle>
+            <TextTitle style={styles.title}>{props.title}</TextTitle>
         </View>
     );
 };
@@ -19,10 +19,15 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 90,
         paddingTop: 36,
-        backgroundColor: Colors.primary, // #f7287b
+        backgroundColor: Platform.OS === 'android' ? Colors.primary : 'white', // #f7287b
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderBottomColor: Platform.OS === 'ios' ? '#ccc' : 'transparent',
+        borderBottomWidth: Platform.OS === 'ios' ? 1 : 0
     },
+    title: {
+        color: Platform.OS === 'ios' ? Colors.primary : 'white'
+    }
 });
 
 export default Header;
