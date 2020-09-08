@@ -1,14 +1,24 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableNativeFeedback, Platform } from 'react-native'
 
 import Colors from '../Constants/Colors'
 const CustomButton = props => {
+    
+    // Creating some touchable effect function
+    let CustomButtonComponent = TouchableOpacity;
+
+    // checking platform specification and android version for ripple effect support
+    if  (Platform.OS === 'android' && Platform.Version >= 21) {
+        CustomButtonComponent = TouchableNativeFeedback;
+    }
     return (
-        <TouchableOpacity activeOpacity={0.9} onPress={props.onTouch}>
-            <View style={styles.buttonContainer}>
-                <Text style={{...styles.buttonText, ...props.style}}>{props.children}</Text>
-            </View>
-        </TouchableOpacity>
+        <View style={styles.customButtonContainer}>
+            <CustomButtonComponent activeOpacity={0.9} onPress={props.onTouch}>
+                <View style={styles.buttonContainer}>
+                    <Text style={{...styles.buttonText, ...props.style}}>{props.children}</Text>
+                </View>
+            </CustomButtonComponent>
+        </View>
     )
 };
 
@@ -28,6 +38,12 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: 'open-sans-regular',
         fontSize: 16
+    },
+    customButtonContainer: {
+        borderBottomStartRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopLeftRadius: 20,
+        overflow: 'hidden'
     }
 })
 
