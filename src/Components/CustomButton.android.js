@@ -8,7 +8,7 @@ const CustomButton = props => {
     let CustomButtonComponent = TouchableOpacity;
 
     // checking platform specification and android version for ripple effect support
-    if  (Platform.OS === 'android' && Platform.Version >= 21) {
+    if  (Platform.Version >= 21) {
         CustomButtonComponent = TouchableNativeFeedback;
     }
     return (
