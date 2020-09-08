@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as Font from 'expo-font';
 
 // To load the font and prolong the screen until a certain task is complete
@@ -75,10 +75,10 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
-      <Header title={"Random Year Guess Game"} />
-      {content}
-    </View>
+    <SafeAreaView style={styles.container}>
+        <Header title={"Random Year Guess Game"} />
+        {content}
+    </SafeAreaView>
   );
 }
 
