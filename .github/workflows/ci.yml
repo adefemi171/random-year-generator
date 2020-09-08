@@ -1,0 +1,23 @@
+name: react-native-android-build-apk
+on:
+  push:
+    branches:
+      - master
+jobs:
+  install-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+  publish-expo:
+    needs: install-and-test
+    runs-on: ubuntu-latest
+    steps: 
+      - {uses: actions/checkout@v2}
+      - {name: 'Install Expo', run: 'sudo npm i -g expo-cli'}
+      - {name: 'Login to Expo', run: 'expo login -u ${{ secrets.USERNAME}} -p ${{ secrets.PASSWORD }}'}
+      - {name: 'Install packages', run: 'sudo yarn'}
+      - {name: 'Build and publish project', run: 'expo publish'}
+      - {name: 'Build android app', run: 'expo build:android'}
